@@ -1,4 +1,4 @@
-package sk.kosisckaakademia.kiss.kolesarova.nebus.senic;
+package sk.kosisckaakademia.kkns.pexeso;
 
 /*
 it is a class Main for a main method, for creating objects and static methods

@@ -11,13 +11,5 @@ public class Main {
     //pridavam koment na dalsi test
 
 
-        ///nova metoda
-        System.out.println("Uvod");
-
-        
-        System.out.println("asfasgagasgasgagasgasga"); //tst
-
-        System.out.println("Ahoj");
-        System.out.println("Skuska v Githube");
     }
 }

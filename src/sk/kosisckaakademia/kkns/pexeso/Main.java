@@ -10,10 +10,5 @@ public class Main {
     public static void main(String[] args) {
     //pridavam koment na dalsi test
 
-
-        
-        ///
-        System.out.println("Skuska");
-        ///
     }
 }

@@ -11,5 +11,6 @@ public class Main {
     //pridavam koment na dalsi test
 
         System.out.println("Ahoj");
+        System.out.println("Skuska v Githube");
     }
 }

@@ -10,6 +10,6 @@ public class Main {
     public static void main(String[] args) {
     //pridavam koment na dalsi test
 
-        //test
+        int a=1; //new variable
     }
 }

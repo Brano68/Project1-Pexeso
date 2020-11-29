@@ -20,32 +20,29 @@ public class Main {
 
     public static void main(String[] args) {
 
-        int answer = askQuestions();
-        //for(;;){ //menu of game an infinity loop
+        String answer = askQuestions();
+        for(;;){ //menu of game an infinity loop
 
-        //}
+        }
 
     }
 
     //a method for asking what does the player want
-    private static int askQuestions(){
+    private static String askQuestions(){
         System.out.println();
         System.out.println(ANSI_BLUE +"Welcome to Memory Console Game. " +ANSI_RESET);
         System.out.println("---------------------------------");
         System.out.println("If you are eager to play, enter 1");
         System.out.println(ANSI_YELLOW +"To see the game rules, enter 2" +ANSI_RESET);
-        System.out.println(ANSI_RED +"Exit the game via 0" +ANSI_RESET);
+        System.out.println(ANSI_RED +"Exit the game via random key" +ANSI_RESET);
         System.out.println("---------------------------------");
 
         Scanner sc = new Scanner(System.in);
-        while(1>0) {
-            String value = sc.nextLine();
-            switch (value) {
-                case "0": System.out.println(ANSI_RED +"Exiting game.." +ANSI_RESET); return 0;
-                case "1": System.out.println("Starting the game.."); return 1;
-                case "2": System.out.println(ANSI_YELLOW +"Viewing the game rules.." +ANSI_RESET); return 2;
-                default: System.out.print(ANSI_GREY +"Invalid enter. Try again.. " +ANSI_RESET); continue;
-            }
+        String value = sc.nextLine();
+        switch (value) {
+            case "1": System.out.println("Starting the game.."); return value;
+            case "2": System.out.println(ANSI_YELLOW +"Viewing the game rules.." +ANSI_RESET); return value;
+            default: System.out.println(ANSI_RED +"Quitting the game.." +ANSI_RESET); return value;
         }
 
     }

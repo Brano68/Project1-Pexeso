@@ -5,20 +5,49 @@ it is a class Main for a main method, for creating objects and static methods
 We are making a memory game with letters.
  */
 
+import java.util.Scanner;
+
 public class Main {
+    //Colors
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_BLACK = "\u001B[30m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_GREY = "\u001B[90m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_PURPLE = "\u001B[35m";
+
     public static void main(String[] args) {
 
-        //menu of game an infinity loop
-        for(;;){
+        int answer = askQuestions();
+        //for(;;){ //menu of game an infinity loop
 
-        }
+        //}
 
     }
 
     //a method for asking what does the player want
-    private static String askQuestions(){
+    private static int askQuestions(){
+        System.out.println();
+        System.out.println(ANSI_BLUE +"Welcome to Memory Console Game. " +ANSI_RESET);
+        System.out.println("---------------------------------");
+        System.out.println("If you are eager to play, enter 1");
+        System.out.println(ANSI_YELLOW +"To see the game rules, enter 2" +ANSI_RESET);
+        System.out.println(ANSI_RED +"Exit the game via 0" +ANSI_RESET);
+        System.out.println("---------------------------------");
 
-        return "";
+        Scanner sc = new Scanner(System.in);
+        while(1>0) {
+            String value = sc.nextLine();
+            switch (value) {
+                case "0": System.out.println(ANSI_RED +"Exiting game.." +ANSI_RESET); return 0;
+                case "1": System.out.println("Starting the game.."); return 1;
+                case "2": System.out.println(ANSI_YELLOW +"Viewing the game rules.." +ANSI_RESET); return 2;
+                default: System.out.print(ANSI_GREY +"Invalid enter. Try again.. " +ANSI_RESET); continue;
+            }
+        }
+
     }
 
     //a method for printing rules

@@ -5,6 +5,10 @@ it is a class Main for a main method, for creating objects and static methods
 We are making a memory game with letters.
  */
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
@@ -20,9 +24,13 @@ public class Main {
 
     public static void main(String[] args) {
 
-        String answer = askQuestions();
-        for(;;){ //menu of game an infinity loop
 
+        for(;;){ //menu of game an infinity loop
+            String answer = askQuestions();
+            switch(answer){
+                case "2": printRules(); break;
+                default: return;
+            }
         }
 
     }
@@ -49,7 +57,24 @@ public class Main {
 
     //a method for printing rules
     private static void printRules(){
+        System.out.println();
+        try{
+            FileReader fr = new FileReader("resources/rules.txt");
+            BufferedReader read = new BufferedReader(fr);
+            String line = read.readLine();
+            while(line!=null){
+                System.out.println(line);
+                line = read.readLine();
+            }
+            System.out.println();
+            fr.close(); read.close();
 
+            System.out.print(ANSI_RED +"Enter random key to continue.. ");
+            String a = new Scanner(System.in).nextLine();
+            return;
+        }catch(IOException e){
+            e.printStackTrace();
+        }
     }
 
     //a method for finding out who is your fighter

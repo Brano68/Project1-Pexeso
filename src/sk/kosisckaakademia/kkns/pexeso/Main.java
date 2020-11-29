@@ -48,7 +48,9 @@ public class Main {
 
     //a method for generating name of PC
     private static String generateNamePc(){
+        String[] names = new String[]{"Atom", "Zeus", "Mars", "PC-Friend"};
 
+        
         return "";
     }
 

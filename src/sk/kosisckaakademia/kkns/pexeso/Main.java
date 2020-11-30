@@ -47,7 +47,8 @@ public class Main {
                 if(choice.equals("1")){
                     continue;
                 }else{
-                    break;
+                    continue;
+                    //break; //if you want to quit the game instead of continue
                 }
             }else {
                 System.out.println(ANSI_BLACK_BACKGROUND + ANSI_WHITE + "You have just choosen  - Exit game!!!" + ANSI_RESET);
@@ -167,5 +168,7 @@ public class Main {
     private static void draw_A_Draw(){
 
     }
+
+
 
 }

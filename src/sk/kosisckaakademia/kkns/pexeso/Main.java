@@ -5,25 +5,76 @@ it is a class Main for a main method, for creating objects and static methods
 We are making a memory game with letters.
  */
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Scanner;
+
 public class Main {
+    //Colors
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_BLACK = "\u001B[30m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_GREY = "\u001B[90m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_PURPLE = "\u001B[35m";
+
     public static void main(String[] args) {
 
-        //menu of game an infinity loop
-        for(;;){
 
+        for(;;){ //menu of game an infinity loop
+            String answer = askQuestions();
+            switch(answer){
+                case "2": printRules(); break;
+                default: return;
+            }
         }
 
     }
 
     //a method for asking what does the player want
     private static String askQuestions(){
+        System.out.println();
+        System.out.println(ANSI_BLUE +"Welcome to Memory Console Game. " +ANSI_RESET);
+        System.out.println("---------------------------------");
+        System.out.println("If you are eager to play, enter 1");
+        System.out.println(ANSI_YELLOW +"To see the game rules, enter 2" +ANSI_RESET);
+        System.out.println(ANSI_RED +"Exit the game via random key" +ANSI_RESET);
+        System.out.println("---------------------------------");
 
-        return "";
+        Scanner sc = new Scanner(System.in);
+        String value = sc.nextLine();
+        switch (value) {
+            case "1": System.out.println("Starting the game.."); return value;
+            case "2": System.out.println(ANSI_YELLOW +"Viewing the game rules.." +ANSI_RESET); return value;
+            default: System.out.println(ANSI_RED +"Quitting the game.." +ANSI_RESET); return value;
+        }
+
     }
 
     //a method for printing rules
     private static void printRules(){
+        System.out.println();
+        try{
+            FileReader fr = new FileReader("resources/rules.txt");
+            BufferedReader read = new BufferedReader(fr);
+            String line = read.readLine();
+            while(line!=null){
+                System.out.println(line);
+                line = read.readLine();
+            }
+            System.out.println();
+            fr.close(); read.close();
 
+            System.out.print(ANSI_RED +"Enter random key to continue.. ");
+            String a = new Scanner(System.in).nextLine();
+            return;
+        }catch(IOException e){
+            e.printStackTrace();
+        }
     }
 
     //a method for finding out who is your fighter

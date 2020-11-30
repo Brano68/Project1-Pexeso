@@ -50,7 +50,7 @@ public class Main {
     private static String generateNamePc(){
         String[] names = new String[]{"Atom", "Zeus", "Mars", "PC-Friend"};
 
-        
+
         return "";
     }
 

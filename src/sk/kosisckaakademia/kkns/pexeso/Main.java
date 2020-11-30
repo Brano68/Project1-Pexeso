@@ -23,6 +23,7 @@ public class Main {
     public static final String ANSI_BLACK_BACKGROUND = "\u001B[40m";
     public static final String ANSI_WHITE = "\u001B[37m";
     public static final String ANSI_PURPLE_BACKGROUND = "\u001B[45m";
+    public static final String ANSI_YELLOW_BACKGROUND = "\u001B[43m";
 
 
     static Scanner sc = new Scanner(System.in);
@@ -37,6 +38,10 @@ public class Main {
                     Player[] players = createTwoPlayers();
                     //a space for the rest code
 
+
+                    //for testing a cup and a tie
+                    drawVictory();
+                    draw_A_Draw();
                 }else{
                     //here is a space if a fighter is a PC
 
@@ -160,13 +165,30 @@ public class Main {
 
     //a method for drawing a gold cup
     private static void drawVictory(){
-
+        System.out.println("  "+ANSI_YELLOW_BACKGROUND+ANSI_PURPLE+"OOOOOOOOOOOOOO"+ANSI_RESET);
+        System.out.println("   "+ANSI_YELLOW_BACKGROUND+"            "+ANSI_RESET);
+        System.out.println("    "+ANSI_YELLOW_BACKGROUND+"          "+ANSI_RESET);
+        System.out.println("     "+ANSI_YELLOW_BACKGROUND+"        "+ANSI_RESET);
+        System.out.println("      "+ANSI_YELLOW_BACKGROUND+"      "+ANSI_RESET);
+        System.out.println("       "+ANSI_YELLOW_BACKGROUND+"    "+ANSI_RESET);
+        System.out.println("        "+ANSI_YELLOW_BACKGROUND+"OO"+ANSI_RESET);
+        System.out.println("        "+ANSI_YELLOW_BACKGROUND+ANSI_PURPLE+"OO"+ANSI_RESET);
+        System.out.println("        "+ANSI_YELLOW_BACKGROUND+"OO"+ANSI_RESET);
+        System.out.println("     "+ANSI_YELLOW_BACKGROUND+"OOOOOOOO"+ANSI_RESET);
     }
 
     //a method for drawing a draw or tie, it happens when players have the same score or
     //their score is under 0
     private static void draw_A_Draw(){
-
+        System.out.println("  "+ANSI_PURPLE+"OOOOOOOOO  OOOOOOOOO   OOOO   O  OOOOOOOOO  OOOOOOOOO"+ANSI_RESET);
+        System.out.println("  "+ANSI_PURPLE+"O          O       O   O  O  O   O          O       O"+ANSI_RESET);
+        System.out.println("  "+ANSI_PURPLE+"O          O       O   OOOO O    O          O       O"+ANSI_RESET);
+        System.out.println("  "+ANSI_PURPLE+"O          O       O       O     O          O       O"+ANSI_RESET);
+        System.out.println("  "+ANSI_PURPLE+"OOOOOOOOO  O       O      O      OOOOOOOOO  O       O"+ANSI_RESET);
+        System.out.println("  "+ANSI_PURPLE+"        O  O       O     O               O  O       O"+ANSI_RESET);
+        System.out.println("  "+ANSI_PURPLE+"        O  O       O    O OOOO           O  O       O"+ANSI_RESET);
+        System.out.println("  "+ANSI_PURPLE+"        O  O       O   O  O  O           O  O       O"+ANSI_RESET);
+        System.out.println("  "+ANSI_PURPLE+"OOOOOOOOO  OOOOOOOOO  O   OOOO   OOOOOOOOO  OOOOOOOOO"+ANSI_RESET);
     }
 
 

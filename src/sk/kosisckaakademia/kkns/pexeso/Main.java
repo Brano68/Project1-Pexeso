@@ -6,7 +6,6 @@ We are making a memory game with letters.
  */
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
@@ -21,15 +20,39 @@ public class Main {
     public static final String ANSI_YELLOW = "\u001B[33m";
     public static final String ANSI_BLUE = "\u001B[34m";
     public static final String ANSI_PURPLE = "\u001B[35m";
+    public static final String ANSI_BLACK_BACKGROUND = "\u001B[40m";
+    public static final String ANSI_WHITE = "\u001B[37m";
+    public static final String ANSI_PURPLE_BACKGROUND = "\u001B[45m";
+
+
+    static Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
 
-
         for(;;){ //menu of game an infinity loop
             String answer = askQuestions();
-            switch(answer){
-                case "2": printRules(); break;
-                default: return;
+            if(answer.equals("1")){
+                String choiceYourFighter = whoIsYourFighter();
+                if(choiceYourFighter.equals("1")){
+                    Player[] players = createTwoPlayers();
+                    //a space for the rest code
+
+                }else{
+                    //here is a space if a fighter is a PC
+
+                }
+                break;
+            }else if(answer.equals("2")){
+                String choice = printRules();
+                if(choice.equals("1")){
+                    continue;
+                }else{
+                    break;
+                }
+            }else {
+                System.out.println(ANSI_BLACK_BACKGROUND + ANSI_WHITE + "You have just choosen  - Exit game!!!" + ANSI_RESET);
+                System.out.println(ANSI_BLACK_BACKGROUND + ANSI_WHITE + "Bye. I hope we will see you soon." + ANSI_RESET);
+                break;
             }
         }
 
@@ -56,7 +79,7 @@ public class Main {
     }
 
     //a method for printing rules
-    private static void printRules(){
+    private static String printRules(){
         System.out.println();
         try{
             FileReader fr = new FileReader("resources/rules.txt");
@@ -71,21 +94,41 @@ public class Main {
 
             System.out.print(ANSI_RED +"Enter random key to continue.. ");
             String a = new Scanner(System.in).nextLine();
-            return;
+            return a;
         }catch(IOException e){
             e.printStackTrace();
         }
+        return null;
     }
 
     //a method for finding out who is your fighter
     private static String whoIsYourFighter(){
-
-        return "";
+        System.out.println(ANSI_PURPLE_BACKGROUND + "Have you got a fighter or I will be your fighter?" + ANSI_RESET);
+        System.out.println(ANSI_PURPLE_BACKGROUND + "In case you have the fighter press 1" + ANSI_RESET);
+        System.out.println(ANSI_PURPLE_BACKGROUND + "If you do not have the fighter press any key." + ANSI_RESET);
+        String result;
+        result = sc.nextLine();
+        if(result.equals("1")){
+            return "1";
+        }else{
+            return "";
+        }
     }
 
     //a method for creating two players
     private static Player[] createTwoPlayers(){
         Player[] players = new Player[2];
+        System.out.println(ANSI_BLUE + "Player1 type your name: " + ANSI_RESET);
+        String name1;
+        name1 = sc.nextLine();
+        Player1 player1 = new Player1(name1);
+        players[0] = player1;
+
+        System.out.println(ANSI_GREY + "Player2 type your name: " + ANSI_RESET);
+        String name2;
+        name2 = sc.nextLine();
+        Player2 player2 = new Player2(name2);
+        players[1] = player2;
 
         return players;
     }
@@ -107,7 +150,11 @@ public class Main {
 
     //a method timer for 1,5s
     private static void timer(){
-
+        try {
+            Thread.sleep(1500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     //a method for drawing a gold cup

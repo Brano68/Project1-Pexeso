@@ -8,6 +8,7 @@ We are making a memory game with letters.
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
@@ -20,6 +21,7 @@ public class Main {
     public static final String ANSI_YELLOW = "\u001B[33m";
     public static final String ANSI_BLUE = "\u001B[34m";
     public static final String ANSI_PURPLE = "\u001B[35m";
+    public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_BLACK_BACKGROUND = "\u001B[40m";
     public static final String ANSI_WHITE = "\u001B[37m";
     public static final String ANSI_PURPLE_BACKGROUND = "\u001B[45m";
@@ -44,6 +46,9 @@ public class Main {
                     draw_A_Draw();
                 }else{
                     //here is a space if a fighter is a PC
+                    Player[] players = createPlayerAndPcPlayer();
+
+
 
                 }
                 break;
@@ -109,9 +114,10 @@ public class Main {
 
     //a method for finding out who is your fighter
     private static String whoIsYourFighter(){
-        System.out.println(ANSI_PURPLE_BACKGROUND + "Have you got a fighter or I will be your fighter?" + ANSI_RESET);
-        System.out.println(ANSI_PURPLE_BACKGROUND + "In case you have the fighter press 1" + ANSI_RESET);
-        System.out.println(ANSI_PURPLE_BACKGROUND + "If you do not have the fighter press any key." + ANSI_RESET);
+        System.out.println();
+        System.out.println(ANSI_PURPLE_BACKGROUND + "Do you have an opponent or you wanna play against PC? " + ANSI_RESET);
+        System.out.println(ANSI_PURPLE_BACKGROUND + "If you want to play against another player, enter 1" + ANSI_RESET);
+        System.out.println(ANSI_PURPLE_BACKGROUND + "If you don't, enter random key" + ANSI_RESET);
         String result;
         result = sc.nextLine();
         if(result.equals("1")){
@@ -124,13 +130,13 @@ public class Main {
     //a method for creating two players
     private static Player[] createTwoPlayers(){
         Player[] players = new Player[2];
-        System.out.println(ANSI_BLUE + "Player1 type your name: " + ANSI_RESET);
+        System.out.println(ANSI_BLUE + "Player 1, enter your name: " + ANSI_RESET);
         String name1;
         name1 = sc.nextLine();
         Player1 player1 = new Player1(name1);
         players[0] = player1;
 
-        System.out.println(ANSI_GREY + "Player2 type your name: " + ANSI_RESET);
+        System.out.println(ANSI_RED + "Player 2, enter your name: " + ANSI_RESET);
         String name2;
         name2 = sc.nextLine();
         Player2 player2 = new Player2(name2);
@@ -142,16 +148,26 @@ public class Main {
     //a method for creating one player and PCplayer
     private static Player[] createPlayerAndPcPlayer(){
         Player[] players = new Player[2];
+        System.out.println(ANSI_BLUE +"Enter your name: " +ANSI_RESET);
+        String name1 = sc.nextLine();
+        Player1 player1 = new Player1(name1);
+        players[0] = player1;
+
+        String name2;
+        do{name2 = generateNamePc();} while(name2.equals(name1));
+        Player2 player2 = new Player2(name2);
+        players[1] = player2;
+        System.out.println(ANSI_RED +"Your opponent " +name2 +"(PC) stands ready. Enter random key to start the match ");
+        sc.nextLine();
 
         return players;
     }
 
     //a method for generating name of PC
     private static String generateNamePc(){
-        String[] names = new String[]{"Atom", "Zeus", "Mars", "PC-Friend"};
-
-
-        return "";
+        String[] names = new String[]{"Atom", "Zeus", "Mars", "PC-Friend", "Atlas", "Zolik", "Ludvik", "Spartakus", "Arnold"};
+        int i= new Random().nextInt(names.length);
+        return names[i];
     }
 
     //a method timer for 1,5s
@@ -180,15 +196,13 @@ public class Main {
     //a method for drawing a draw or tie, it happens when players have the same score or
     //their score is under 0
     private static void draw_A_Draw(){
-        System.out.println("  "+ANSI_PURPLE+"OOOOOOOOO  OOOOOOOOO   OOOO   O  OOOOOOOOO  OOOOOOOOO"+ANSI_RESET);
-        System.out.println("  "+ANSI_PURPLE+"O          O       O   O  O  O   O          O       O"+ANSI_RESET);
-        System.out.println("  "+ANSI_PURPLE+"O          O       O   OOOO O    O          O       O"+ANSI_RESET);
-        System.out.println("  "+ANSI_PURPLE+"O          O       O       O     O          O       O"+ANSI_RESET);
-        System.out.println("  "+ANSI_PURPLE+"OOOOOOOOO  O       O      O      OOOOOOOOO  O       O"+ANSI_RESET);
-        System.out.println("  "+ANSI_PURPLE+"        O  O       O     O               O  O       O"+ANSI_RESET);
-        System.out.println("  "+ANSI_PURPLE+"        O  O       O    O OOOO           O  O       O"+ANSI_RESET);
-        System.out.println("  "+ANSI_PURPLE+"        O  O       O   O  O  O           O  O       O"+ANSI_RESET);
-        System.out.println("  "+ANSI_PURPLE+"OOOOOOOOO  OOOOOOOOO  O   OOOO   OOOOOOOOO  OOOOOOOOO"+ANSI_RESET);
+        System.out.println("  "+ANSI_CYAN+"00000000000000000  00   00000000000000"+ANSI_RESET);
+        System.out.println("  "+ANSI_CYAN+"        00         00   00"+ANSI_RESET);
+        System.out.println("  "+ANSI_CYAN+"        00         00   00"+ANSI_RESET);
+        System.out.println("  "+ANSI_CYAN+"        00         00   00000000"+ANSI_RESET);
+        System.out.println("  "+ANSI_CYAN+"        00         00   00"+ANSI_RESET);
+        System.out.println("  "+ANSI_CYAN+"        00         00   00"+ANSI_RESET);
+        System.out.println("  "+ANSI_CYAN+"        00         00   0000000000000"+ANSI_RESET);
     }
 
 

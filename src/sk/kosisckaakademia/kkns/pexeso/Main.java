@@ -163,8 +163,8 @@ public class Main {
         namePC = generateNamePc();
         PcPlayer pcPlayer = new PcPlayer(namePC);
         players[1] = pcPlayer;
-        System.out.println(ANSI_RED +"Your opponent " + namePC +" (PC) stands ready.");
-        //sc.nextLine();
+        System.out.println(ANSI_RED +"Your opponent " + namePC +" (PC) stands ready. Press any key for continue.");
+        sc.nextLine();
         return players;
     }
 

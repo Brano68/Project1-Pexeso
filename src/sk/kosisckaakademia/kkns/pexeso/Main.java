@@ -41,6 +41,8 @@ public class Main {
                     //a space for the rest code
 
 
+
+
                     //for testing a cup and a tie
                     drawVictory();
                     draw_A_Draw();
@@ -48,6 +50,10 @@ public class Main {
                     //here is a space if a fighter is a PC
                     Player[] players = createPlayerAndPcPlayer();
 
+                    //for testing if array is created correctly
+                    for(int i = 0; i < players.length; i++){
+                        players[i].getName();
+                    }
 
 
                 }
@@ -153,13 +159,12 @@ public class Main {
         Player1 player1 = new Player1(name1);
         players[0] = player1;
 
-        String name2;
-        do{name2 = generateNamePc();} while(name2.equals(name1));
-        Player2 player2 = new Player2(name2);
-        players[1] = player2;
-        System.out.println(ANSI_RED +"Your opponent " +name2 +"(PC) stands ready. Enter random key to start the match ");
-        sc.nextLine();
-
+        String namePC;
+        namePC = generateNamePc();
+        PcPlayer pcPlayer = new PcPlayer(namePC);
+        players[1] = pcPlayer;
+        System.out.println(ANSI_RED +"Your opponent " + namePC +" (PC) stands ready.");
+        //sc.nextLine();
         return players;
     }
 
@@ -196,13 +201,13 @@ public class Main {
     //a method for drawing a draw or tie, it happens when players have the same score or
     //their score is under 0
     private static void draw_A_Draw(){
-        System.out.println("  "+ANSI_CYAN+"00000000000000000  00   00000000000000"+ANSI_RESET);
-        System.out.println("  "+ANSI_CYAN+"        00         00   00"+ANSI_RESET);
-        System.out.println("  "+ANSI_CYAN+"        00         00   00"+ANSI_RESET);
-        System.out.println("  "+ANSI_CYAN+"        00         00   00000000"+ANSI_RESET);
-        System.out.println("  "+ANSI_CYAN+"        00         00   00"+ANSI_RESET);
-        System.out.println("  "+ANSI_CYAN+"        00         00   00"+ANSI_RESET);
-        System.out.println("  "+ANSI_CYAN+"        00         00   0000000000000"+ANSI_RESET);
+        System.out.println("  "+ANSI_CYAN+" 0000000000000000  00  00000000000000"+ANSI_RESET);
+        System.out.println("  "+ANSI_CYAN+"        00         00  00"+ANSI_RESET);
+        System.out.println("  "+ANSI_CYAN+"        00         00  00"+ANSI_RESET);
+        System.out.println("  "+ANSI_CYAN+"        00         00  00000000"+ANSI_RESET);
+        System.out.println("  "+ANSI_CYAN+"        00         00  00"+ANSI_RESET);
+        System.out.println("  "+ANSI_CYAN+"        00         00  00"+ANSI_RESET);
+        System.out.println("  "+ANSI_CYAN+"        00         00  0000000000000"+ANSI_RESET);
     }
 
 

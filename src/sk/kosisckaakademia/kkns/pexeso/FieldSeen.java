@@ -6,4 +6,6 @@ public class FieldSeen extends Field {
     public FieldSeen(){
 
     }
+
+
 }

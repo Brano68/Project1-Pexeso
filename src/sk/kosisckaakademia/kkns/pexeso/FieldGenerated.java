@@ -1,5 +1,9 @@
 package sk.kosisckaakademia.kkns.pexeso;
 
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Set;
+
 public class FieldGenerated extends Field{
 
     //constructor
@@ -17,6 +21,13 @@ public class FieldGenerated extends Field{
     //a method for generating 52numbers without repeating
     private int[] generateArrayRandomNumbersFrom0To56With52Numbers(){
         int[] arr = new int[52];
+        Set<Integer> set = new HashSet<>();
+        for(int i=0; i<arr.length; i++){
+            for(;;){
+                int num = new Random().nextInt(57);
+                if(set.add(num)==true){ arr[i]=num; break; }
+            }
+        }
 
         return arr;
     }

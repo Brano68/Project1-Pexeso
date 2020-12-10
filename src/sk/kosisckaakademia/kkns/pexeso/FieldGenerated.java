@@ -33,12 +33,12 @@ public class FieldGenerated extends Field{
     }
 
     //a method for generating 52numbers without repeating
-    private int[] generateArrayRandomNumbersFrom0To56With52Numbers(){
+    private int[] generateArrayRandomNumbersFrom0To55With52Numbers(){
         int[] arr = new int[52];
         Set<Integer> set = new HashSet<>();
         for(int i=0; i<arr.length; i++){
             for(;;){
-                int num = new Random().nextInt(57);
+                int num = new Random().nextInt(56);
                 if(set.add(num)==true){ arr[i]=num; break; }
             }
         }
@@ -47,12 +47,12 @@ public class FieldGenerated extends Field{
     }
 
     //ukazka testovania metoda sa zmaze sluzi iba na testing
-    public int[] generateArrayRandomNumbersFrom0To56With52Numberss(){
+    public int[] generateArrayRandomNumbersFrom0To55With52Numberss(){
         int[] arr = new int[52];
         Set<Integer> set = new HashSet<>();
         for(int i=0; i<arr.length; i++){
             for(;;){
-                int num = new Random().nextInt(57);
+                int num = new Random().nextInt(56);
                 if(set.add(num)==true){ arr[i]=num; break; }
             }
         }
@@ -63,15 +63,46 @@ public class FieldGenerated extends Field{
 
     //a method for filling the field with alphabet
     private void fillFieldWithAlphabet(){
-        int[] arr = generateArrayRandomNumbersFrom0To56With52Numbers();
+        int[] arr = generateArrayRandomNumbersFrom0To55With52Numbers();
         String card = "Aa";
 
-
+        for(int x=0; x<arr.length; x++) {
+            int count=0;
+            for (int i = 0; i < field.length; i++) {
+                for (int j=0; j<field[0].length; j++) {
+                    //count++;
+                    if (count == arr[x]) {
+                        field[i][j] = card;
+                        card = String.valueOf((char)(card.charAt(0)+1)) + String.valueOf((char)(card.charAt(1)+1));
+                    }
+                    count++;
+                    //if(card.equals("Zz")) card="Aa"; //inak boli 3krat Aa a 3 krat Bb
+                    if(card.charAt(0)>'Z') card = "Aa";
+                }
+            }
+        }
     }
 
     //a method for filling the field with black Peters &&
     private void fillFieldWithBlackPeters(){
+        String blackPeter = "&&";
+        for(int i = 0; i < field.length; i++){
+            for(int j = 0; j < field[0].length; j++){
+                if(field[i][j].equals(" ")){
+                    field[i][j] = blackPeter;
+                }
+            }
+        }
+    }
 
+    //a method for testing which draws a generated field
+    public void printGeneratedField(){
+        for(int i = 0; i < field.length; i++){
+            for(int j = 0; j < field[0].length; j++){
+                System.out.print(field[i][j] + " ");
+            }
+            System.out.println();
+        }
     }
 
 }

@@ -52,7 +52,7 @@ public class FieldGenerated extends Field{
         Set<Integer> set = new HashSet<>();
         for(int i=0; i<arr.length; i++){
             for(;;){
-                int num = new Random().nextInt(57);
+                int num = new Random().nextInt(56);
                 if(set.add(num)==true){ arr[i]=num; break; }
             }
         }
@@ -70,12 +70,12 @@ public class FieldGenerated extends Field{
             int count=0;
             for (int i = 0; i < field.length; i++) {
                 for (int j=0; j<field[i].length; j++) {
-                    count++;
                     if (count == arr[x]) {
                         field[i][j] = card;
                         card = String.valueOf((char)(card.charAt(0)+1)) + String.valueOf((char)(card.charAt(1)+1));
+                        if(card.equals("[{")) card="Aa";
                     }
-                    if(card.equals("Zz")) card="Aa";
+                    count++;
                 }
             }
         }

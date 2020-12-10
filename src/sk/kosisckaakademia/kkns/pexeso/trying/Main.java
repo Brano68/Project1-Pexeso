@@ -50,13 +50,13 @@ public class Main{
             for(int x=0; x<arr.length; x++) {
                 int count=0;
                 for (int i = 0; i <field.length; i++) {
-                    for (int j=0; j<field[i].length; j++) {
-                        count++;
+                    for (int j=0; j<field[0].length; j++) {
                         if (count == arr[x]) {
                             field[i][j] = card;
                             card = String.valueOf((char)(card.charAt(0)+1)) + String.valueOf((char)(card.charAt(1)+1));
+                            if(card.equals("[{")) card="Aa";
                         }
-                        if(card.equals("Zz")) card="Aa";
+                        count++;
                     }
                 }
             }
@@ -65,7 +65,7 @@ public class Main{
 
 
             for(int i=0; i< field.length; i++){
-                for(int j=0; j<field[i].length; j++){
+                for(int j=0; j<field[0].length; j++){
                     System.out.print(field[i][j] +" ");
                 }
             }

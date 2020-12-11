@@ -22,32 +22,8 @@ public class FieldGenerated extends Field{
         }
     }
 
-    //ukazka testovania metoda sa zmaze sluzi iba na testing
-    public String[][] fillFieldWithEmptySpacess(){
-        for(int i = 0; i < field.length; i++){
-            for(int j = 0; j < field[0].length; j++){
-                field[i][j] = " ";
-            }
-        }
-        return field;
-    }
-
     //a method for generating 52numbers without repeating
     private int[] generateArrayRandomNumbersFrom0To55With52Numbers(){
-        int[] arr = new int[52];
-        Set<Integer> set = new HashSet<>();
-        for(int i=0; i<arr.length; i++){
-            for(;;){
-                int num = new Random().nextInt(56);
-                if(set.add(num)==true){ arr[i]=num; break; }
-            }
-        }
-
-        return arr;
-    }
-
-    //ukazka testovania metoda sa zmaze sluzi iba na testing
-    public int[] generateArrayRandomNumbersFrom0To55With52Numberss(){
         int[] arr = new int[52];
         Set<Integer> set = new HashSet<>();
         for(int i=0; i<arr.length; i++){
@@ -69,18 +45,18 @@ public class FieldGenerated extends Field{
         for(int x=0; x<arr.length; x++) {
             int count=0;
             for (int i = 0; i < field.length; i++) {
-                for (int j=0; j<field[0].length; j++) {
-                    //count++;
+                for (int j=0; j<field[i].length; j++) {
                     if (count == arr[x]) {
                         field[i][j] = card;
                         card = String.valueOf((char)(card.charAt(0)+1)) + String.valueOf((char)(card.charAt(1)+1));
+                        if(card.equals("[{")) card="Aa";
                     }
                     count++;
-                    //if(card.equals("Zz")) card="Aa"; //inak boli 3krat Aa a 3 krat Bb
-                    if(card.charAt(0)>'Z') card = "Aa";
                 }
             }
         }
+
+
     }
 
     //a method for filling the field with black Peters &&
@@ -95,8 +71,8 @@ public class FieldGenerated extends Field{
         }
     }
 
-    //a method for testing which draws a generated field
-    public void printGeneratedField(){
+    //a testing method for drawing a generated field
+    public void vykresliVygenerovanuMapu(){
         for(int i = 0; i < field.length; i++){
             for(int j = 0; j < field[0].length; j++){
                 System.out.print(field[i][j] + " ");

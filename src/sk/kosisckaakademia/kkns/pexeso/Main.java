@@ -145,6 +145,10 @@ public class Main {
         System.out.println(ANSI_RED + "Player 2, enter your name: " + ANSI_RESET);
         String name2;
         name2 = sc.nextLine();
+        while(name2.equals(name1)){
+            System.out.println(ANSI_RED +"The name is already taken by Player 1. Enter different name: " +ANSI_RESET);
+            name2 = sc.nextLine();
+        }
         Player2 player2 = new Player2(name2);
         players[1] = player2;
 
@@ -160,10 +164,10 @@ public class Main {
         players[0] = player1;
 
         String namePC;
-        namePC = generateNamePc();
+        do{ namePC = generateNamePc(); }while(namePC.equals(name1));
         PcPlayer pcPlayer = new PcPlayer(namePC);
         players[1] = pcPlayer;
-        System.out.println(ANSI_RED +"Your opponent " + namePC +" (PC) stands ready. Press any key for continue.");
+        System.out.println(ANSI_RED +"Your opponent " + namePC +" (PC) stands ready. Enter random key to continue.");
         sc.nextLine();
         return players;
     }

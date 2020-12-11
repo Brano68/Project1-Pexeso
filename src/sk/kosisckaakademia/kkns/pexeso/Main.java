@@ -39,16 +39,28 @@ public class Main {
                 if(choiceYourFighter.equals("1")){
                     Player[] players = createTwoPlayers();
                     //a space for the rest code
+                    //test
+                    FieldSeen fs = new FieldSeen();
+                    fs.paintField((Player1)players[0], (Player2)players[1]);
+                    //test-end
 
 
 
 
                     //for testing a cup and a tie
+                    System.out.println();
+                    System.out.println();
                     drawVictory();
                     draw_A_Draw();
                 }else{
                     //here is a space if a fighter is a PC
                     Player[] players = createPlayerAndPcPlayer();
+
+                    //test
+                    FieldSeen fs = new FieldSeen();
+                    fs.paintField((Player1)players[0], (PcPlayer)players[1]);
+                    //test-end
+
 
                     //for testing if array is created correctly
                     for(int i = 0; i < players.length; i++){
@@ -167,7 +179,7 @@ public class Main {
         do{ namePC = generateNamePc(); }while(namePC.equals(name1));
         PcPlayer pcPlayer = new PcPlayer(namePC);
         players[1] = pcPlayer;
-        System.out.println(ANSI_RED +"Your opponent " + namePC +" (PC) stands ready. Enter random key to continue.");
+        System.out.println(ANSI_RED +"Your opponent " + namePC +" (PC) stands ready. Enter random key to continue." +ANSI_RESET);
         sc.nextLine();
         return players;
     }

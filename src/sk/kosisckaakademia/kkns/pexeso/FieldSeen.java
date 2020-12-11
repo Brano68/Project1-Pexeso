@@ -25,5 +25,13 @@ public class FieldSeen extends Field {
 
     }
 
+    //test
+    public <T extends Player> void paintField(Player1 player1, T player2){
+        System.out.println();
+        System.out.println("+-------------------------+" +"  "
+                +"\u001B[34m" +player1.getName() +": " +player1.getScore() +" "
+                +"\u001B[31m" +player2.getName() +": " +player2.getScore() +"\u001B[0m");
+    }
+
 
 }

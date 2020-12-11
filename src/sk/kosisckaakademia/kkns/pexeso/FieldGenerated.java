@@ -72,7 +72,7 @@ public class FieldGenerated extends Field{
     }
 
     //a testing method for drawing a generated field
-    public void vykresliVygenerovanuMapu(){
+    public void paintGeneratedField(){
         for(int i = 0; i < field.length; i++){
             for(int j = 0; j < field[0].length; j++){
                 System.out.print(field[i][j] + " ");

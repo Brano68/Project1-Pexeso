@@ -19,7 +19,7 @@ public class Main{
 
         //testujem generovanie cisel
         FieldGenerated fieldGenerated = new FieldGenerated();
-        fieldGenerated.vykresliVygenerovanuMapu();
+        fieldGenerated.paintGeneratedField();
 
 
 

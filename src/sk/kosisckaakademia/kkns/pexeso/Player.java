@@ -16,4 +16,15 @@ public abstract class Player {
     public String getName() {
         return name;
     }
+
+    public String[] chooseCards(FieldSeen fieldseen){
+        String[] indexs = new String[2];
+
+
+
+
+        return indexs;
+    }
+
+
 }

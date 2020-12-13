@@ -8,6 +8,7 @@ public class FieldSeen extends Field {
     public static final String ANSI_YELLOW_BACKGROUND = "\u001B[43m";
     public static final String ANSI_BLUE_BACKGROUND = "\u001B[44m";
     public static final String ANSI_PURPLE_BACKGROUND = "\u001B[45m";
+    public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_PURPLE = "\u001B[35m";
     public static final String ANSI_BLUE = "\u001B[34m";
     public static final String ANSI_WHITE = "\u001B[37m";
@@ -56,12 +57,13 @@ public class FieldSeen extends Field {
 
  */
 
-        String border = "###########################";
+        System.out.println();
+        String border = "+-------------------------+";
         System.out.println("\t" + ANSI_GREEN_BACKGROUND + border + ANSI_RESET + " " +
-                ANSI_PURPLE + player1.getName() + " Score:" + player1.getScore() + ANSI_RESET + "\t" +
-                ANSI_BLUE + player2.getName() + " Score:" + player2.getScore() + ANSI_RESET);
+                ANSI_BLUE + player1.getName() + ": " + player1.getScore() + ANSI_RESET + " | " +
+                ANSI_RED + player2.getName() + ": " + player2.getScore() + ANSI_RESET);
         for(int i = 0; i < field.length; i++){
-            System.out.print("\t" + ANSI_GREEN_BACKGROUND + "#" + ANSI_RESET);
+            System.out.print("\t" + ANSI_GREEN_BACKGROUND + "|" + ANSI_RESET);
             System.out.print(ANSI_CYAN_BACKGROUND + " " + ANSI_RESET);
             for(int j = 0; j < field[0].length; j++){
                 if(field[i][j].length() == 1){
@@ -73,12 +75,12 @@ public class FieldSeen extends Field {
                     System.out.print(field[i][j] + ANSI_CYAN_BACKGROUND + " " + ANSI_RESET);
                 }
             }
-            System.out.print(ANSI_GREEN_BACKGROUND + "#" + ANSI_RESET);
+            System.out.print(ANSI_GREEN_BACKGROUND + "|" + ANSI_RESET);
             System.out.println();
             //
-            System.out.print("\t" +ANSI_GREEN_BACKGROUND + "#" + ANSI_RESET);
+            System.out.print("\t" +ANSI_GREEN_BACKGROUND + "|" + ANSI_RESET);
             System.out.print(ANSI_CYAN_BACKGROUND + "                         " + ANSI_RESET);
-            System.out.print(ANSI_GREEN_BACKGROUND + "#" + ANSI_RESET);
+            System.out.print(ANSI_GREEN_BACKGROUND + "|" + ANSI_RESET);
             System.out.println();
         }
         System.out.println("\t" + ANSI_GREEN_BACKGROUND + border + ANSI_RESET);

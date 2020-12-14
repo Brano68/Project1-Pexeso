@@ -81,4 +81,20 @@ public class FieldGenerated extends Field{
         }
     }
 
+
+    //a method which contols if we have cards
+    public boolean checkWhetherCardsAreAvailable(){
+
+
+        return false;
+    }
+
+
+    //a method for a comparing cards
+    public int checkCards(int index1, int index2, FieldSeen fieldSeen){
+
+
+        return 0;
+    }
+
 }

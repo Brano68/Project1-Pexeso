@@ -84,7 +84,15 @@ public class FieldGenerated extends Field{
 
     //a method which contols if we have cards
     public boolean checkWhetherCardsAreAvailable(){
-
+        for(int i=0; i< field.length; i++){
+            for(int j=0; j<field[0].length; j++){
+                String check="Aa";
+                while(check.charAt(0)<='Z'){
+                    if(field[i][j].equals(check)) return true;
+                    check=String.valueOf((char)(check.charAt(0)+1)) + String.valueOf((char)(check.charAt(1)+1));
+                }
+            }
+        }
 
         return false;
     }

@@ -98,11 +98,49 @@ public class FieldGenerated extends Field{
     }
 
 
-    //a method for a comparing cards
+    //a method for a comparing cards and if cards are the same filling with them
     public int checkCards(int index1, int index2, FieldSeen fieldSeen){
+        int counter = 0;
+        String card1 = "";
+        String card2 = "";
+        int i1 = 0, j1 = 0, i2 = 0, j2 = 0;
+        for(int i = 0; i < field.length; i++){
+            for(int j = 0; j < field[0].length; j++){
+                if(counter == index1){
+                    card1 = field[i][j];
+                    i1 = i;
+                    j1 = j;
+                }
+                if(counter == index2){
+                    card2 = field[i][j];
+                    i2 = i;
+                    j2 = j;
+                }
+                counter++;
+            }
+        }
 
-
-        return 0;
+            //in case cards are the same for example Aa - Aa
+        if(card1.equals(card2) && (card1.equals("&&") == false)){
+            fieldSeen.getField()[i1][j1] = field[i1][j1];
+            fieldSeen.getField()[i2][j2] = field[i2][j2];
+            field[i1][j1] = " ";
+            field[i2][j2] = " ";
+            return 1;
+            //in case cards are Black Peters && - &&
+        }else if(card1.equals(card2)){
+            return 2;
+            //in case that the first card is Black Peter
+        }else if(card1.equals("&&")){
+            return 3;
+            //in case that the second card is Black Peter
+        }else if(card2.equals("&&")){
+            return 4;
+        }
+            //in case that the cards are not the same
+        else{
+            return 5;
+        }
     }
 
 }

@@ -80,7 +80,6 @@ public class FieldSeen extends Field {
     //are in the red zone
     public void paintFieldSeen1InCaseBlackPetersOrCardsAreNotTheSame(Player1 player1, Player2 player2, int index1, int index2, FieldGenerated fieldGenerated){
 
-        
 
 
         hideWrongCards(index1, index2);
@@ -91,7 +90,20 @@ public class FieldSeen extends Field {
 
     //a method which is used for hiding (turning) wrong cards
     private void hideWrongCards(int index1, int index2){
-
+        int number = 0;
+        int counter = 0;
+        for(int i = 0; i < field.length; i++){
+            for(int j = 0; j < field[0].length; j++){
+                if(counter == index1){
+                    field[i][j] = String.valueOf(number);
+                }
+                if(counter == index2){
+                    field[i][j] = String.valueOf(number);
+                }
+                counter++;
+                number++;
+            }
+        }
     }
 
 

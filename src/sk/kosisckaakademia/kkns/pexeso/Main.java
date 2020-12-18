@@ -38,20 +38,34 @@ public class Main {
                 String choiceYourFighter = whoIsYourFighter();
                 if(choiceYourFighter.equals("1")){
                     Player[] players = createTwoPlayers();
-                    //a space for the rest code
-                    //test
-                    FieldSeen fs = new FieldSeen();
-                    fs.paintField((Player1)players[0], (Player2)players[1]);
-                    //test-end
+                    FieldSeen fieldSeen = new FieldSeen();
+                    FieldGenerated fieldGenerated = new FieldGenerated();
 
 
+                    //only for testing it will be deleted when we finish the testing
+                    fieldGenerated.paintGeneratedField();
 
 
-                    //for testing a cup and a tie
-                    System.out.println();
-                    System.out.println();
-                    drawVictory();
-                    draw_A_Draw();
+                    Player winner = players1And2PlayTheGame((Player1) players[0], (Player2) players[1], fieldSeen, fieldGenerated);
+                    if(winner == null){
+                        System.out.println();
+                        System.out.println("--------Tie!!!--------");
+                        System.out.println();
+                        draw_A_Draw();
+                    }else if(winner == players[0]){
+                        System.out.println();
+                        System.out.println("\t" + ANSI_YELLOW_BACKGROUND + "----Congratulations!!!----" + ANSI_RESET);
+                        System.out.println("\t" + ANSI_YELLOW_BACKGROUND + "A winner is: " + players[0].getName() + ANSI_RESET);
+                        System.out.println();
+                        drawVictory();
+                    }else{
+                        System.out.println();
+                        System.out.println("\t" + ANSI_YELLOW_BACKGROUND + "----Congratulations!!!----" + ANSI_RESET);
+                        System.out.println("\t" + ANSI_YELLOW_BACKGROUND + "A winner is: " + players[1].getName() + ANSI_RESET);
+                        System.out.println();
+                        drawVictory();
+                    }
+                    break;
                 }else{
                     //here is a space if a fighter is a PC
                     Player[] players = createPlayerAndPcPlayer();
@@ -224,6 +238,123 @@ public class Main {
         System.out.println("  "+ANSI_CYAN+"        00         00  00"+ANSI_RESET);
         System.out.println("  "+ANSI_CYAN+"        00         00  00"+ANSI_RESET);
         System.out.println("  "+ANSI_CYAN+"        00         00  0000000000000"+ANSI_RESET);
+    }
+
+
+    //a method for playing the game between player1 vs player2
+    private static Player players1And2PlayTheGame(Player1 player1, Player2 player2, FieldSeen fieldSeen, FieldGenerated fieldGenerated){
+        fieldSeen.paintField(player1, player2);
+        //till the cards are available
+        while(fieldGenerated.checkWhetherCardsAreAvailable()) {
+            //player1
+            System.out.println(ANSI_BLUE + "---" + player1.getName() + "---" + ANSI_RESET);
+            String[] indexes = player1.chooseCards(fieldSeen);
+            int index1 = Integer.parseInt(indexes[0]);
+            int index2 = Integer.parseInt(indexes[1]);
+            //
+            int identity = fieldGenerated.checkCards(index1, index2, fieldSeen);
+                //in case the choice was right
+            if (identity == 1) {
+                player1.setScore(2);
+                fieldSeen.paintField(player1, player2);
+                //in case the choice was && and &&
+            } else if (identity == 2) {
+                //
+                player1.setScore(-6);
+                fieldSeen.paintFieldSeen1InCaseBlackPetersOrCardsAreNotTheSame(player1, player2, index1, index2, fieldGenerated);
+                //
+                timer();
+                fieldSeen.paintField(player1,player2);
+                //in case the choice was && and whatever else
+            } else if (identity == 3) {
+                player1.setScore(-3);
+                fieldSeen.paintFieldSeen1InCaseBlackPetersOrCardsAreNotTheSame(player1, player2, index1, index2, fieldGenerated);
+                timer();
+                fieldSeen.paintField(player1,player2);
+                //in case the choice was whatever and &&
+            } else if (identity == 4) {
+                player1.setScore(-3);
+                fieldSeen.paintFieldSeen1InCaseBlackPetersOrCardsAreNotTheSame(player1, player2, index1, index2, fieldGenerated);
+                timer();
+                fieldSeen.paintField(player1,player2);
+                //in case the cards are not the same
+            } else {
+                fieldSeen.paintFieldSeen1InCaseBlackPetersOrCardsAreNotTheSame(player1, player2, index1, index2, fieldGenerated);
+                timer();
+                fieldSeen.paintField(player1,player2);
+            }
+                //check whether we have cards
+            if (fieldGenerated.checkWhetherCardsAreAvailable() == false) {
+                break;
+            }
+                //in case the player1 was right
+            if (identity == 1) {
+                System.out.println(ANSI_BLUE + "---Your choice has been right :) " + player1.getName() + " go one more time!!!---" + ANSI_RESET);
+                continue;
+            }
+
+
+            //player2 - similar to a player1
+            if (fieldGenerated.checkWhetherCardsAreAvailable() == false) {
+                break;
+            }
+
+            while (true) {
+                if (fieldGenerated.checkWhetherCardsAreAvailable() == false) {
+                    break;
+                }
+                System.out.println(ANSI_RED + "---" + player2.getName() + "---" + ANSI_RESET);
+                indexes = player2.chooseCards(fieldSeen);
+                index1 = Integer.parseInt(indexes[0]);
+                index2 = Integer.parseInt(indexes[1]);
+                //
+                identity = fieldGenerated.checkCards(index1, index2, fieldSeen);
+                if (identity == 1) {
+                    player2.setScore(2);
+                    fieldSeen.paintField(player1, player2);
+                    //
+                } else if (identity == 2) {
+                    //
+                    player2.setScore(-6);
+                    fieldSeen.paintFieldSeen1InCaseBlackPetersOrCardsAreNotTheSame(player1, player2, index1, index2, fieldGenerated);
+                    //
+                    timer();
+                    fieldSeen.paintField(player1,player2);
+                } else if (identity == 3) {
+                    player2.setScore(-3);
+                    fieldSeen.paintFieldSeen1InCaseBlackPetersOrCardsAreNotTheSame(player1, player2, index1, index2, fieldGenerated);
+                    timer();
+                    fieldSeen.paintField(player1,player2);
+                } else if (identity == 4) {
+                    player2.setScore(-3);
+                    fieldSeen.paintFieldSeen1InCaseBlackPetersOrCardsAreNotTheSame(player1, player2, index1, index2, fieldGenerated);
+                    timer();
+                    fieldSeen.paintField(player1,player2);
+                } else {
+                    fieldSeen.paintFieldSeen1InCaseBlackPetersOrCardsAreNotTheSame(player1, player2, index1, index2, fieldGenerated);
+                    timer();
+                    fieldSeen.paintField(player1,player2);
+                }
+                if (fieldGenerated.checkWhetherCardsAreAvailable() == false) {
+                    break;
+                }
+                if(identity == 1){
+                    System.out.println(ANSI_RED + "---Your choice has been right :) " + player2.getName() + " go one more time!!!---" + ANSI_RESET);
+                    continue;
+                }else {
+                    break;
+                }
+            }
+
+        }
+        //return who is winner 1 - player1, 2 - player2 and null if nobody
+        if((player1.getScore()>player2.getScore()) && (player1.getScore()>0)){
+            return player1;
+        }else if((player2.getScore()>player1.getScore()) && (player2.getScore()>0)){
+            return player2;
+        }else{
+            return null;
+        }
     }
 
 

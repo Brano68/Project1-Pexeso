@@ -78,7 +78,7 @@ public class FieldSeen extends Field {
 
     //a method which is used in case the cards are not same and wrong cards
     //are in the red zone
-    public void paintFieldSeen1InCaseBlackPetersOrCardsAreNotTheSame(Player1 player1, Player2 player2, int index1, int index2, FieldGenerated fieldGenerated){
+    public <T extends Player> void paintFieldSeenInCaseBlackPetersOrCardsAreNotTheSame(Player1 player1, T player2, int index1, int index2, FieldGenerated fieldGenerated){
         int count=0;
         for(int i=0; i< field.length; i++){
             for(int j=0; j<field[0].length; j++){

@@ -54,7 +54,7 @@ public abstract class Player {
     }
 
     //a method if the card is still available
-    private boolean checkIfTheCardIsStillAvailable(String[][] fieldSeen, int index){
+    public boolean checkIfTheCardIsStillAvailable(String[][] fieldSeen, int index){
         int number;
         String value;
         for(int i = 0; i < fieldSeen.length; i++){

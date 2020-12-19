@@ -34,6 +34,7 @@ public class Main {
 
         for(;;){ //menu of game an infinity loop
             String answer = askQuestions();
+            //player1 vs player2
             if(answer.equals("1")){
                 String choiceYourFighter = whoIsYourFighter();
                 if(choiceYourFighter.equals("1")){
@@ -55,33 +56,49 @@ public class Main {
                     }else if(winner == players[0]){
                         System.out.println();
                         System.out.println("\t" + ANSI_YELLOW_BACKGROUND + "----Congratulations!!!----" + ANSI_RESET);
-                        System.out.println("\t" + ANSI_YELLOW_BACKGROUND + "A winner is: " + players[0].getName() + ANSI_RESET);
+                        System.out.println("\t" + ANSI_YELLOW_BACKGROUND + "----A winner is: " + players[0].getName() + ANSI_RESET);
                         System.out.println();
                         drawVictory();
                     }else{
                         System.out.println();
                         System.out.println("\t" + ANSI_YELLOW_BACKGROUND + "----Congratulations!!!----" + ANSI_RESET);
-                        System.out.println("\t" + ANSI_YELLOW_BACKGROUND + "A winner is: " + players[1].getName() + ANSI_RESET);
+                        System.out.println("\t" + ANSI_YELLOW_BACKGROUND + "----A winner is: " + players[1].getName() + ANSI_RESET);
                         System.out.println();
                         drawVictory();
                     }
                     break;
                 }else{
+                    //Player1 vs PcPlayer
                     //here is a space if a fighter is a PC
                     Player[] players = createPlayerAndPcPlayer();
-
-                    //test
                     FieldSeen fieldSeen = new FieldSeen();
                     FieldGenerated fieldGenerated = new FieldGenerated();
-                    fieldSeen.paintField((Player1)players[0], (PcPlayer)players[1]);
-                    //test-end
+
+                    //only for testing it will be deleted when we finish the testing
+                    fieldGenerated.paintGeneratedField();
 
                     Player winner = playerAndPcPlayTheGame((Player1) players[0], (PcPlayer) players[1], fieldSeen, fieldGenerated);
-
-
-
+                    if(winner == null){
+                        System.out.println();
+                        System.out.println("--------Tie!!!--------");
+                        System.out.println();
+                        draw_A_Draw();
+                    }else if(winner instanceof Player1){
+                        System.out.println();
+                        System.out.println("\t" + ANSI_YELLOW_BACKGROUND + "----Congratulations!!!----" + ANSI_RESET);
+                        System.out.println("\t" + ANSI_YELLOW_BACKGROUND + "----A winner is: " + players[0].getName() + ANSI_RESET);
+                        System.out.println();
+                        drawVictory();
+                    }else{
+                        System.out.println();
+                        System.out.println("\t" + ANSI_YELLOW_BACKGROUND + "----Congratulations!!!----" + ANSI_RESET);
+                        System.out.println("\t" + ANSI_YELLOW_BACKGROUND + "----A winner is: " + players[1].getName() + ANSI_RESET);
+                        System.out.println();
+                        drawVictory();
+                    }
                 }
                 break;
+                //for gaming rules
             }else if(answer.equals("2")){
                 String choice = printRules();
                 if(choice.equals("1")){
@@ -90,6 +107,7 @@ public class Main {
                     continue;
                     //break; //if you want to quit the game instead of continue
                 }
+                //for quitting a game
             }else {
                 System.out.println(ANSI_BLACK_BACKGROUND + ANSI_WHITE + "You have just choosen  - Exit game!!!" + ANSI_RESET);
                 System.out.println(ANSI_BLACK_BACKGROUND + ANSI_WHITE + "Bye. I hope we will see you soon." + ANSI_RESET);
@@ -356,13 +374,116 @@ public class Main {
     }
 
 
+    //a method for playing the game between player1 vs PCplayer
+    private static Player playerAndPcPlayTheGame(Player1 player1, PcPlayer pcPlayer, FieldSeen fieldSeen, FieldGenerated fieldGenerated){
+        fieldSeen.paintField(player1, pcPlayer);
+        //till the cards are available
+        while(fieldGenerated.checkWhetherCardsAreAvailable()) {
+            //player1
+            System.out.println(ANSI_BLUE + "---" + player1.getName() + "---" + ANSI_RESET);
+            String[] indexes = player1.chooseCards(fieldSeen);
+            int index1 = Integer.parseInt(indexes[0]);
+            int index2 = Integer.parseInt(indexes[1]);
+            //
+            int identity = fieldGenerated.checkCards(index1, index2, fieldSeen);
+            //in case the choice was right
+            if (identity == 1) {
+                player1.setScore(2);
+                fieldSeen.paintField(player1, pcPlayer);
+                //in case the choice was && and &&
+            } else if (identity == 2) {
+                //
+                player1.setScore(-6);
+                fieldSeen.paintFieldSeenInCaseBlackPetersOrCardsAreNotTheSame(player1, pcPlayer, index1, index2, fieldGenerated);
+                //
+                timer();
+                fieldSeen.paintField(player1, pcPlayer);
+                //in case the choice was && and whatever else
+            } else if (identity == 3) {
+                player1.setScore(-3);
+                fieldSeen.paintFieldSeenInCaseBlackPetersOrCardsAreNotTheSame(player1, pcPlayer, index1, index2, fieldGenerated);
+                timer();
+                fieldSeen.paintField(player1, pcPlayer);
+                //in case the choice was whatever and &&
+            } else if (identity == 4) {
+                player1.setScore(-3);
+                fieldSeen.paintFieldSeenInCaseBlackPetersOrCardsAreNotTheSame(player1, pcPlayer, index1, index2, fieldGenerated);
+                timer();
+                fieldSeen.paintField(player1, pcPlayer);
+                //in case the cards are not the same
+            } else {
+                fieldSeen.paintFieldSeenInCaseBlackPetersOrCardsAreNotTheSame(player1, pcPlayer, index1, index2, fieldGenerated);
+                timer();
+                fieldSeen.paintField(player1, pcPlayer);
+            }
+            //check whether we have cards
+            if (fieldGenerated.checkWhetherCardsAreAvailable() == false) {
+                break;
+            }
+            //in case the player1 was right
+            if (identity == 1) {
+                System.out.println(ANSI_BLUE + "---Your choice has been right :) " + player1.getName() + " go one more time!!!---" + ANSI_RESET);
+                continue;
+            }
 
+            //PcPlayer similar to Player1
+            if (fieldGenerated.checkWhetherCardsAreAvailable() == false) {
+                break;
+            }
 
-    //a method for playing the game between player1 vs player2
-    private static Player playerAndPcPlayTheGame(Player1 player1, PcPlayer player2, FieldSeen fieldSeen, FieldGenerated fieldGenerated){
-        return null;
+            while (true) {
+                if (fieldGenerated.checkWhetherCardsAreAvailable() == false) {
+                    break;
+                }
+                System.out.println(ANSI_RED + "---" + pcPlayer.getName() + "---" + ANSI_RESET);
+                //Pc generated without a mistake two cards from a fieldseen
+                indexes = pcPlayer.generateIndexes(fieldSeen);
+                index1 = Integer.parseInt(indexes[0]);
+                index2 = Integer.parseInt(indexes[1]);
+                //
+                identity = fieldGenerated.checkCards(index1, index2, fieldSeen);
+                if (identity == 1) {
+                    pcPlayer.setScore(2);
+                    fieldSeen.paintField(player1, pcPlayer);
+                } else if (identity == 2) {
+                    pcPlayer.setScore(-6);
+                    fieldSeen.paintFieldSeenInCaseBlackPetersOrCardsAreNotTheSame(player1, pcPlayer, index1, index2, fieldGenerated);
+                    timer();
+                    fieldSeen.paintField(player1, pcPlayer);
+                } else if (identity == 3) {
+                    pcPlayer.setScore(-3);
+                    fieldSeen.paintFieldSeenInCaseBlackPetersOrCardsAreNotTheSame(player1, pcPlayer, index1, index2, fieldGenerated);
+                    timer();
+                    fieldSeen.paintField(player1, pcPlayer);
+                } else if (identity == 4) {
+                    pcPlayer.setScore(-3);
+                    fieldSeen.paintFieldSeenInCaseBlackPetersOrCardsAreNotTheSame(player1, pcPlayer, index1, index2, fieldGenerated);
+                    timer();
+                    fieldSeen.paintField(player1, pcPlayer);
+                } else {
+                    fieldSeen.paintFieldSeenInCaseBlackPetersOrCardsAreNotTheSame(player1, pcPlayer, index1, index2, fieldGenerated);
+                    timer();
+                    fieldSeen.paintField(player1, pcPlayer);
+                }
+                if (fieldGenerated.checkWhetherCardsAreAvailable() == false) {
+                    break;
+                }
+                if(identity == 1){
+                    System.out.println(ANSI_BLUE + "---Your choice has been right :) " + pcPlayer.getName() + " go one more time!!!---" + ANSI_RESET);
+                    continue;
+                }else {
+                    break;
+                }
+            }
+        }
+        //return who is a winner
+        if((player1.getScore()>pcPlayer.getScore()) && (player1.getScore()>0)){
+            return player1;
+        }else if((pcPlayer.getScore()>player1.getScore()) && (pcPlayer.getScore()>0)){
+            return pcPlayer;
+        }else{
+            return null;
+        }
     }
-
-
 
 }

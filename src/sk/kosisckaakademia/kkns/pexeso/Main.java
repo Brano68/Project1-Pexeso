@@ -71,15 +71,13 @@ public class Main {
                     Player[] players = createPlayerAndPcPlayer();
 
                     //test
-                    FieldSeen fs = new FieldSeen();
-                    fs.paintField((Player1)players[0], (PcPlayer)players[1]);
+                    FieldSeen fieldSeen = new FieldSeen();
+                    FieldGenerated fieldGenerated = new FieldGenerated();
+                    fieldSeen.paintField((Player1)players[0], (PcPlayer)players[1]);
                     //test-end
 
+                    Player winner = playerAndPcPlayTheGame((Player1) players[0], (PcPlayer) players[1], fieldSeen, fieldGenerated);
 
-                    //for testing if array is created correctly
-                    for(int i = 0; i < players.length; i++){
-                        players[i].getName();
-                    }
 
 
                 }
@@ -261,25 +259,25 @@ public class Main {
             } else if (identity == 2) {
                 //
                 player1.setScore(-6);
-                fieldSeen.paintFieldSeen1InCaseBlackPetersOrCardsAreNotTheSame(player1, player2, index1, index2, fieldGenerated);
+                fieldSeen.paintFieldSeenInCaseBlackPetersOrCardsAreNotTheSame(player1, player2, index1, index2, fieldGenerated);
                 //
                 timer();
                 fieldSeen.paintField(player1,player2);
                 //in case the choice was && and whatever else
             } else if (identity == 3) {
                 player1.setScore(-3);
-                fieldSeen.paintFieldSeen1InCaseBlackPetersOrCardsAreNotTheSame(player1, player2, index1, index2, fieldGenerated);
+                fieldSeen.paintFieldSeenInCaseBlackPetersOrCardsAreNotTheSame(player1, player2, index1, index2, fieldGenerated);
                 timer();
                 fieldSeen.paintField(player1,player2);
                 //in case the choice was whatever and &&
             } else if (identity == 4) {
                 player1.setScore(-3);
-                fieldSeen.paintFieldSeen1InCaseBlackPetersOrCardsAreNotTheSame(player1, player2, index1, index2, fieldGenerated);
+                fieldSeen.paintFieldSeenInCaseBlackPetersOrCardsAreNotTheSame(player1, player2, index1, index2, fieldGenerated);
                 timer();
                 fieldSeen.paintField(player1,player2);
                 //in case the cards are not the same
             } else {
-                fieldSeen.paintFieldSeen1InCaseBlackPetersOrCardsAreNotTheSame(player1, player2, index1, index2, fieldGenerated);
+                fieldSeen.paintFieldSeenInCaseBlackPetersOrCardsAreNotTheSame(player1, player2, index1, index2, fieldGenerated);
                 timer();
                 fieldSeen.paintField(player1,player2);
             }
@@ -316,22 +314,22 @@ public class Main {
                 } else if (identity == 2) {
                     //
                     player2.setScore(-6);
-                    fieldSeen.paintFieldSeen1InCaseBlackPetersOrCardsAreNotTheSame(player1, player2, index1, index2, fieldGenerated);
+                    fieldSeen.paintFieldSeenInCaseBlackPetersOrCardsAreNotTheSame(player1, player2, index1, index2, fieldGenerated);
                     //
                     timer();
                     fieldSeen.paintField(player1,player2);
                 } else if (identity == 3) {
                     player2.setScore(-3);
-                    fieldSeen.paintFieldSeen1InCaseBlackPetersOrCardsAreNotTheSame(player1, player2, index1, index2, fieldGenerated);
+                    fieldSeen.paintFieldSeenInCaseBlackPetersOrCardsAreNotTheSame(player1, player2, index1, index2, fieldGenerated);
                     timer();
                     fieldSeen.paintField(player1,player2);
                 } else if (identity == 4) {
                     player2.setScore(-3);
-                    fieldSeen.paintFieldSeen1InCaseBlackPetersOrCardsAreNotTheSame(player1, player2, index1, index2, fieldGenerated);
+                    fieldSeen.paintFieldSeenInCaseBlackPetersOrCardsAreNotTheSame(player1, player2, index1, index2, fieldGenerated);
                     timer();
                     fieldSeen.paintField(player1,player2);
                 } else {
-                    fieldSeen.paintFieldSeen1InCaseBlackPetersOrCardsAreNotTheSame(player1, player2, index1, index2, fieldGenerated);
+                    fieldSeen.paintFieldSeenInCaseBlackPetersOrCardsAreNotTheSame(player1, player2, index1, index2, fieldGenerated);
                     timer();
                     fieldSeen.paintField(player1,player2);
                 }
@@ -355,6 +353,14 @@ public class Main {
         }else{
             return null;
         }
+    }
+
+
+
+
+    //a method for playing the game between player1 vs player2
+    private static Player playerAndPcPlayTheGame(Player1 player1, PcPlayer player2, FieldSeen fieldSeen, FieldGenerated fieldGenerated){
+        return null;
     }
 
 

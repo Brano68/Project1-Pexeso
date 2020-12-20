@@ -21,26 +21,12 @@ public class FieldSeen extends Field {
     }
 
 
-    //a method for filling a field with numbers from 0 to 55
+    //a method for filling a field with numbers from 1 to 56
     private void fillFieldWithNumbers(){
-        int count=0;
+        int count=1;
         for(int i=0; i< field.length; i++)
             for(int j=0; j<field[0].length; j++)
                 field[i][j]=String.valueOf(count++);
-    }
-
-
-    //a method for painting a gaming field player1 vs player2
-    //a method was replaced by a generic method
-    public void paintField1(Player1 player1, Player2 player2){
-
-    }
-
-
-    //a method for painting a gaming field player1 vs computer
-    //a method was replaced by a generic method
-    public void paintField2(Player1 player1, PcPlayer pcPlayer){
-
     }
 
     //test a generic method
@@ -72,6 +58,7 @@ public class FieldSeen extends Field {
             System.out.println();
         }
         System.out.println("\t" + ANSI_GREEN_BACKGROUND + border + ANSI_RESET);
+        System.out.println();
     }
 
 
@@ -79,7 +66,7 @@ public class FieldSeen extends Field {
     //a method which is used in case the cards are not same and wrong cards
     //are in the red zone
     public <T extends Player> void paintFieldSeenInCaseBlackPetersOrCardsAreNotTheSame(Player1 player1, T player2, int index1, int index2, FieldGenerated fieldGenerated){
-        int count=0;
+        int count=1;
         for(int i=0; i< field.length; i++){
             for(int j=0; j<field[0].length; j++){
                 if(count==index1 || count==index2) field[i][j]=fieldGenerated.field[i][j];
@@ -87,7 +74,7 @@ public class FieldSeen extends Field {
             }
         }
 
-        String border = "+-------------------------+"; count=0;
+        String border = "+-------------------------+"; count=1;
         System.out.println();
         System.out.println("\t" + ANSI_GREEN_BACKGROUND + border + ANSI_RESET + " " +
                 ANSI_BLUE + player1.getName() + ": " + player1.getScore() + ANSI_RESET + " | " +
@@ -128,8 +115,8 @@ public class FieldSeen extends Field {
 
     //a method which is used for hiding (turning) wrong cards
     private void hideWrongCards(int index1, int index2){
-        int number = 0;
-        int counter = 0;
+        int number = 1;
+        int counter = 1;
         for(int i = 0; i < field.length; i++){
             for(int j = 0; j < field[0].length; j++){
                 if(counter == index1){

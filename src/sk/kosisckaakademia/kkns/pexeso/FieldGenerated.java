@@ -100,7 +100,7 @@ public class FieldGenerated extends Field{
 
     //a method for a comparing cards and if cards are the same filling with them
     public int checkCards(int index1, int index2, FieldSeen fieldSeen){
-        int counter = 0;
+        int counter = 1;
         String card1 = "";
         String card2 = "";
         int i1 = 0, j1 = 0, i2 = 0, j2 = 0;

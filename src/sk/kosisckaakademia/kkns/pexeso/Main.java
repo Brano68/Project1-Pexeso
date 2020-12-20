@@ -26,6 +26,7 @@ public class Main {
     public static final String ANSI_WHITE = "\u001B[37m";
     public static final String ANSI_PURPLE_BACKGROUND = "\u001B[45m";
     public static final String ANSI_YELLOW_BACKGROUND = "\u001B[43m";
+    public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
 
 
     static Scanner sc = new Scanner(System.in);
@@ -34,10 +35,11 @@ public class Main {
 
         for(;;){ //menu of game an infinity loop
             String answer = askQuestions();
-            //player1 vs player2
+
             if(answer.equals("1")){
                 String choiceYourFighter = whoIsYourFighter();
                 if(choiceYourFighter.equals("1")){
+                    //Player1 vs Player2
                     Player[] players = createTwoPlayers();
                     FieldSeen fieldSeen = new FieldSeen();
                     FieldGenerated fieldGenerated = new FieldGenerated();
@@ -55,21 +57,21 @@ public class Main {
                         draw_A_Draw();
                     }else if(winner == players[0]){
                         System.out.println();
-                        System.out.println("\t" + ANSI_YELLOW_BACKGROUND + "----Congratulations!!!----" + ANSI_RESET);
-                        System.out.println("\t" + ANSI_YELLOW_BACKGROUND + "----A winner is: " + players[0].getName() + ANSI_RESET);
+                        System.out.println("\t" + ANSI_YELLOW + "Congratulations!!" + ANSI_RESET);
+                        System.out.println("\t" + ANSI_YELLOW + players[0].getName() +" won the game" + ANSI_RESET);
                         System.out.println();
                         drawVictory();
                     }else{
                         System.out.println();
-                        System.out.println("\t" + ANSI_YELLOW_BACKGROUND + "----Congratulations!!!----" + ANSI_RESET);
-                        System.out.println("\t" + ANSI_YELLOW_BACKGROUND + "----A winner is: " + players[1].getName() + ANSI_RESET);
+                        System.out.println("\t" + ANSI_YELLOW + "Congratulations!!" + ANSI_RESET);
+                        System.out.println("\t" + ANSI_YELLOW + players[1].getName() +" won the game" + ANSI_RESET);
                         System.out.println();
                         drawVictory();
                     }
                     break;
+
                 }else{
                     //Player1 vs PcPlayer
-                    //here is a space if a fighter is a PC
                     Player[] players = createPlayerAndPcPlayer();
                     FieldSeen fieldSeen = new FieldSeen();
                     FieldGenerated fieldGenerated = new FieldGenerated();
@@ -80,39 +82,27 @@ public class Main {
                     Player winner = playerAndPcPlayTheGame((Player1) players[0], (PcPlayer) players[1], fieldSeen, fieldGenerated);
                     if(winner == null){
                         System.out.println();
-                        System.out.println("--------Tie!!!--------");
+                        System.out.println("Game ended as tie");
                         System.out.println();
                         draw_A_Draw();
                     }else if(winner instanceof Player1){
                         System.out.println();
-                        System.out.println("\t" + ANSI_YELLOW_BACKGROUND + "----Congratulations!!!----" + ANSI_RESET);
-                        System.out.println("\t" + ANSI_YELLOW_BACKGROUND + "----A winner is: " + players[0].getName() + ANSI_RESET);
+                        System.out.println("\t" + ANSI_YELLOW + "Congratulations!!" + ANSI_RESET);
+                        System.out.println("\t" + ANSI_YELLOW + players[0].getName() +" won the game" + ANSI_RESET);
                         System.out.println();
                         drawVictory();
                     }else{
                         System.out.println();
-                        System.out.println("\t" + ANSI_YELLOW_BACKGROUND + "----Congratulations!!!----" + ANSI_RESET);
-                        System.out.println("\t" + ANSI_YELLOW_BACKGROUND + "----A winner is: " + players[1].getName() + ANSI_RESET);
+                        System.out.println("\t" + ANSI_YELLOW + "Congratulations!!" + ANSI_RESET);
+                        System.out.println("\t" + ANSI_YELLOW + players[1].getName() +" won the game" + ANSI_RESET);
                         System.out.println();
                         drawVictory();
                     }
+                    break;
                 }
-                break;
-                //for gaming rules
-            }else if(answer.equals("2")){
-                String choice = printRules();
-                if(choice.equals("1")){
-                    continue;
-                }else{
-                    continue;
-                    //break; //if you want to quit the game instead of continue
-                }
-                //for quitting a game
-            }else {
-                System.out.println(ANSI_BLACK_BACKGROUND + ANSI_WHITE + "You have just choosen  - Exit game!!!" + ANSI_RESET);
-                System.out.println(ANSI_BLACK_BACKGROUND + ANSI_WHITE + "Bye. I hope we will see you soon." + ANSI_RESET);
-                break;
+
             }
+            else if(answer.equals("2")) printRules(); else break;
         }
 
     }
@@ -163,9 +153,9 @@ public class Main {
     //a method for finding out who is your fighter
     private static String whoIsYourFighter(){
         System.out.println();
-        System.out.println(ANSI_PURPLE_BACKGROUND + "Do you have an opponent or you wanna play against PC? " + ANSI_RESET);
-        System.out.println(ANSI_PURPLE_BACKGROUND + "If you want to play against another player, enter 1" + ANSI_RESET);
-        System.out.println(ANSI_PURPLE_BACKGROUND + "If you don't, enter random key" + ANSI_RESET);
+        System.out.println(ANSI_CYAN + "Do you have an opponent or you wanna play against PC? " + ANSI_RESET);
+        System.out.println(ANSI_YELLOW + "If you want to play against another player, enter 1" + ANSI_RESET);
+        System.out.println(  "If you don't, enter random key" );
         String result;
         result = sc.nextLine();
         if(result.equals("1")){
@@ -221,10 +211,10 @@ public class Main {
         return names[i];
     }
 
-    //a method timer for 1,5s
+    //a method timer for 3,5s
     private static void timer(){
         try {
-            Thread.sleep(1500);
+            Thread.sleep(3500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -232,28 +222,28 @@ public class Main {
 
     //a method for drawing a gold cup
     private static void drawVictory(){
-        System.out.println("  "+ANSI_YELLOW_BACKGROUND+ANSI_PURPLE+"OOOOOOOOOOOOOO"+ANSI_RESET);
-        System.out.println("   "+ANSI_YELLOW_BACKGROUND+"            "+ANSI_RESET);
-        System.out.println("    "+ANSI_YELLOW_BACKGROUND+"          "+ANSI_RESET);
-        System.out.println("     "+ANSI_YELLOW_BACKGROUND+"        "+ANSI_RESET);
-        System.out.println("      "+ANSI_YELLOW_BACKGROUND+"      "+ANSI_RESET);
-        System.out.println("       "+ANSI_YELLOW_BACKGROUND+"    "+ANSI_RESET);
-        System.out.println("        "+ANSI_YELLOW_BACKGROUND+"OO"+ANSI_RESET);
-        System.out.println("        "+ANSI_YELLOW_BACKGROUND+ANSI_PURPLE+"OO"+ANSI_RESET);
-        System.out.println("        "+ANSI_YELLOW_BACKGROUND+"OO"+ANSI_RESET);
-        System.out.println("     "+ANSI_YELLOW_BACKGROUND+"OOOOOOOO"+ANSI_RESET);
+        System.out.println("\t" +ANSI_YELLOW_BACKGROUND+ANSI_PURPLE+"OOOOOOOOOOOOOO"+ANSI_RESET);
+        System.out.println("\t" +" "+ANSI_YELLOW_BACKGROUND+"            "+ANSI_RESET);
+        System.out.println("\t" +"  "+ANSI_YELLOW_BACKGROUND+"          "+ANSI_RESET);
+        System.out.println("\t" +"   "+ANSI_YELLOW_BACKGROUND+"        "+ANSI_RESET);
+        System.out.println("\t" +"    "+ANSI_YELLOW_BACKGROUND+"      "+ANSI_RESET);
+        System.out.println("\t" +"     "+ANSI_YELLOW_BACKGROUND+"    "+ANSI_RESET);
+        System.out.println("\t" +"      "+ANSI_YELLOW_BACKGROUND+"OO"+ANSI_RESET);
+        System.out.println("\t" +"      "+ANSI_YELLOW_BACKGROUND+ANSI_PURPLE+"OO"+ANSI_RESET);
+        System.out.println("\t" +"      "+ANSI_YELLOW_BACKGROUND+"OO"+ANSI_RESET);
+        System.out.println("\t" +"   "+ANSI_YELLOW_BACKGROUND+"OOOOOOOO"+ANSI_RESET);
     }
 
     //a method for drawing a draw or tie, it happens when players have the same score or
     //their score is under 0
     private static void draw_A_Draw(){
-        System.out.println("  "+ANSI_CYAN+" 0000000000000000  00  00000000000000"+ANSI_RESET);
-        System.out.println("  "+ANSI_CYAN+"        00         00  00"+ANSI_RESET);
-        System.out.println("  "+ANSI_CYAN+"        00         00  00"+ANSI_RESET);
-        System.out.println("  "+ANSI_CYAN+"        00         00  00000000"+ANSI_RESET);
-        System.out.println("  "+ANSI_CYAN+"        00         00  00"+ANSI_RESET);
-        System.out.println("  "+ANSI_CYAN+"        00         00  00"+ANSI_RESET);
-        System.out.println("  "+ANSI_CYAN+"        00         00  0000000000000"+ANSI_RESET);
+        System.out.println("\t"+ANSI_PURPLE+"0000000000000000  00  00000000000000"+ANSI_RESET);
+        System.out.println("\t"+ANSI_PURPLE+"       00         00  00"+ANSI_RESET);
+        System.out.println("\t"+ANSI_PURPLE+"       00         00  00"+ANSI_RESET);
+        System.out.println("\t"+ANSI_PURPLE+"       00         00  00000000"+ANSI_RESET);
+        System.out.println("\t"+ANSI_PURPLE+"       00         00  00"+ANSI_RESET);
+        System.out.println("\t"+ANSI_PURPLE+"       00         00  00"+ANSI_RESET);
+        System.out.println("\t"+ANSI_PURPLE+"       00         00  0000000000000"+ANSI_RESET);
     }
 
 
@@ -263,7 +253,7 @@ public class Main {
         //till the cards are available
         while(fieldGenerated.checkWhetherCardsAreAvailable()) {
             //player1
-            System.out.println(ANSI_BLUE + "---" + player1.getName() + "---" + ANSI_RESET);
+            System.out.println(ANSI_BLUE + "(" + player1.getName() +")" + ANSI_RESET);
             String[] indexes = player1.chooseCards(fieldSeen);
             int index1 = Integer.parseInt(indexes[0]);
             int index2 = Integer.parseInt(indexes[1]);
@@ -305,7 +295,7 @@ public class Main {
             }
                 //in case the player1 was right
             if (identity == 1) {
-                System.out.println(ANSI_BLUE + "---Your choice has been right :) " + player1.getName() + " go one more time!!!---" + ANSI_RESET);
+                System.out.println(ANSI_YELLOW + "You guessed the cards! You have one extra turn." + ANSI_RESET);
                 continue;
             }
 
@@ -319,7 +309,7 @@ public class Main {
                 if (fieldGenerated.checkWhetherCardsAreAvailable() == false) {
                     break;
                 }
-                System.out.println(ANSI_RED + "---" + player2.getName() + "---" + ANSI_RESET);
+                System.out.println(ANSI_RED + "(" + player2.getName() + ")" + ANSI_RESET);
                 indexes = player2.chooseCards(fieldSeen);
                 index1 = Integer.parseInt(indexes[0]);
                 index2 = Integer.parseInt(indexes[1]);
@@ -355,7 +345,7 @@ public class Main {
                     break;
                 }
                 if(identity == 1){
-                    System.out.println(ANSI_RED + "---Your choice has been right :) " + player2.getName() + " go one more time!!!---" + ANSI_RESET);
+                    System.out.println(ANSI_YELLOW + "You guessed the cards! You have one extra turn." + ANSI_RESET);
                     continue;
                 }else {
                     break;
@@ -380,7 +370,7 @@ public class Main {
         //till the cards are available
         while(fieldGenerated.checkWhetherCardsAreAvailable()) {
             //player1
-            System.out.println(ANSI_BLUE + "---" + player1.getName() + "---" + ANSI_RESET);
+            System.out.println(ANSI_BLUE + "(" + player1.getName() + ")" + ANSI_RESET);
             String[] indexes = player1.chooseCards(fieldSeen);
             int index1 = Integer.parseInt(indexes[0]);
             int index2 = Integer.parseInt(indexes[1]);
@@ -422,7 +412,7 @@ public class Main {
             }
             //in case the player1 was right
             if (identity == 1) {
-                System.out.println(ANSI_BLUE + "---Your choice has been right :) " + player1.getName() + " go one more time!!!---" + ANSI_RESET);
+                System.out.println(ANSI_YELLOW + "You guessed the cards! You have one extra turn." + ANSI_RESET);
                 continue;
             }
 
@@ -435,7 +425,8 @@ public class Main {
                 if (fieldGenerated.checkWhetherCardsAreAvailable() == false) {
                     break;
                 }
-                System.out.println(ANSI_RED + "---" + pcPlayer.getName() + "---" + ANSI_RESET);
+                System.out.println(ANSI_RED + "(" + pcPlayer.getName() + ")" + ANSI_RESET);
+                System.out.println(ANSI_CYAN +"Opponent is choosing the cards..." +ANSI_RESET); timer();
                 //Pc generated without a mistake two cards from a fieldseen
                 indexes = pcPlayer.generateIndexes(fieldSeen);
                 index1 = Integer.parseInt(indexes[0]);
@@ -469,7 +460,7 @@ public class Main {
                     break;
                 }
                 if(identity == 1){
-                    System.out.println(ANSI_BLUE + "---Your choice has been right :) " + pcPlayer.getName() + " go one more time!!!---" + ANSI_RESET);
+                    System.out.println(ANSI_YELLOW + "Opponent guessed the cards! He has one extra turn." + ANSI_RESET);
                     continue;
                 }else {
                     break;

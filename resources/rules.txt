@@ -1,7 +1,5 @@
-At the beginning the player can choose if he wants to play against PC or another player.
+At the beginning a player can choose if he wants to play against PC or another player.
 Player will pick a pair of cards and if they match, player score will increase by 2.
 Player with a higher score will win.
-Four random cards are hidden Black Peters (&&) and if one is picked, player score wil decrease by 3.
+Four random cards are hidden Black Peters(&&) and if one is picked, player score wil decrease by 3.
 By picking a pair of Black Peters, player score will decrease by 6.
-To return to main menu, enter 1.
-By entering a random key the game will quit.
